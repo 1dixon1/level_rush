@@ -5,8 +5,8 @@ let mainWindow;
 
 app.on('ready', () => {
     mainWindow = new BrowserWindow({
-        width: 800, // Ширина окна
-        height: 600, // Высота окна
+        width: 900, // Ширина окна
+        height: 750, // Высота окна
         webPreferences: {
             preload: path.join(__dirname, 'src/preload.js'),
             contextIsolation: true,
