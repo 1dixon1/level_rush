@@ -37,29 +37,7 @@ export class Map{
                 [1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1],
                 [1, 0, 0, 0, 1, 2, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 1, 0, 0, 4, 1],
                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-            ],   
-            [
-                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                [1, 1, 1, 5, 0, 0, 0, 1, 2, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 2, 0, 1],
-                [1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
-                [1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-                [1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 2, 0, 1, 0, 1, 0, 0, 1, 0, 1],
-                [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 2, 1],
-                [1, 1, 1, 0, 1, 2, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1],
-                [1, 2, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 2, 0, 0, 2, 1, 0, 1, 0, 1],
-                [1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1],
-                [1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1],
-                [1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1],
-                [1, 2, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1],
-                [1, 1, 1, 0, 1, 1, 0, 1, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1],
-                [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
-                [1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1],
-                [1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1],
-                [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 2, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1],
-                [1, 4, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 3, 1],
-                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-            ]
-
+            ]  
         ];   
         if (a === "length"){
             return levels.length
@@ -70,13 +48,49 @@ export class Map{
     };
     generateRandomLevel(width, height) {
         let map = [];
-        
+        let seed = Math.random() * 10;
+        let rooms = Math.floor( Math.random() * 5);
+        console.log("Rooms:"+rooms)
         // Генерация карты с случайными значениями
         for (let y = 0; y < height; y++) {
             const row = [];
             for (let x = 0; x < width; x++) {
-                // С случайным шансом ставим стены (1) или пустое пространство (0)
-                let tile = Math.random() < 0.7 ? 0 : 1;  // 70% пустое пространство, 30% стены
+                let tile = 0;
+                console.log(rooms)
+                if (map.length === 0 || row.length === 0 || map.length === 18 || row.length === 24){
+                    tile = 1;
+                }else{
+                    if(true){
+                        if (rooms === 4 ){
+                            if (row.length === 12 || map.length === 9 ){
+                                tile = Math.random() < 0.3 ? 0 : 1;  
+                            }else{
+                                tile = Math.random() < 0.8 ? 0 : 1;  
+                            }
+                        }else if(rooms === 3){
+                            if (row.length === 12 && map.length < 9 || map.length === 9){
+                                    tile = Math.random() < 0.3 ? 0 : 1;  
+                            }else{
+                                tile = Math.random() < 0.8 ? 0 : 1;  
+                            }
+                        }else if(rooms === 2 ){
+                            if (row.length === 12){
+                                tile = Math.random() < 0.3 ? 0 : 1;  
+                            }else{
+                                tile = Math.random() < 0.8 ? 0 : 1;  
+                            }
+                        }
+                        else if(rooms === 1 ){
+                            tile = Math.random() < 0.8 ? 0 : 1;
+                        }else{
+                            tile = Math.random() < 0.8 ? 0 : 1;
+                        }
+                    }else{
+                        tile = Math.random() < 0.9 ? 0 : 1;  
+                    }
+                }
+
+
                 row.push(tile);
             }
             map.push(row);
@@ -92,8 +106,11 @@ export class Map{
             let x = Math.floor(Math.random() * width);
             let y = Math.floor(Math.random() * height);
             if (map[y][x] === 0) {
-                map[y][x] = 2;  // Размещаем монету
-                coinCount--;
+                if(map[y+1][x+1] === 0 && map[y-1][x-1] === 0){
+                    map[y][x] = 2;  // Размещаем монету
+                    coinCount--;
+                }
+
             }
         }
     
@@ -101,8 +118,11 @@ export class Map{
             let x = Math.floor(Math.random() * width);
             let y = Math.floor(Math.random() * height);
             if (map[y][x] === 0) {
-                map[y][x] = 3;  // Размещаем ключ
-                keyCount--;
+                if(map[y+1][x+1] === 0 && map[y-1][x-1] === 0){
+                    map[y][x] = 3;  // Размещаем ключ
+                    keyCount--;
+                }
+
             }
         }
     
@@ -110,16 +130,22 @@ export class Map{
             let x = Math.floor(Math.random() * width);
             let y = Math.floor(Math.random() * height);
             if (map[y][x] === 0) {
-                map[y][x] = 4;  // Размещаем дверь
-                doorCount--;
+                if(map[y+1][x+1] === 0 && map[y-1][x-1] === 0){
+                    map[y][x] = 4;  // Размещаем дверь
+                    doorCount--;
+                }
+
             }
         }
         while (spawnPoint > 0) {
             let x = Math.floor(Math.random() * width);
             let y = Math.floor(Math.random() * height);
             if (map[y][x] === 0) {
-                map[y][x] = 5;  
-                spawnPoint--;
+                if(map[y+1][x+1] === 0 && map[y-1][x-1] === 0){
+                    map[y][x] = 5;  
+                    spawnPoint--;
+                }
+
             }
         }
     
